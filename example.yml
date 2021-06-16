@@ -1,0 +1,33 @@
+# a Workflow defines the events that trigger actions, and which actions to run in response to the event
+
+# not required
+# if omitted, GitHub autogenerates one based on path to the file and the name of the file itself.
+name: hello
+
+# REQUIRED
+# this is the list of events that will trigger the workflow
+# can also be scheduled using Cron format
+# https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows
+on: [push]
+
+# the jobs for the workflow
+# needs at least one job for workflow to be valid
+jobs:
+  # name of the job
+  # must start with a letter or underscore
+  # can only contain alphanumeric characters, -, or _
+  build:
+    # OS the job will use to run (also known as a "runner")
+    runs-on: ubuntu-latest
+
+    steps:
+    # action is a bundle of code used to perform a specific task
+    # an action === Docker image
+    - uses: actions/checkout@v1 # location of the action
+    - name: Run a one-line script # again, optional
+      # can run scripts in shell instead of actions
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
